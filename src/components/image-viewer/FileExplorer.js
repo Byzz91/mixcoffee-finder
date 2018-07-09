@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Logo from '../Logo';
 
@@ -14,15 +15,12 @@ const AppHeader = styled.div`
   position: fixed;
   background-color: #fafafa;
   border-bottom: 1px solid #ebebeb;
-  height: 60px;
+  height: ${ props => props.isFocus ? '100px' : '60px' };
   width: 100%;
-
-  ${InputFile}:focus & {
-    height: 100px !important;
-  }
+  transition: 0.1s;
 `;
 
-const InputFile = styled.input`
+const InputSearch = styled.input`
   height: 44px;
   vertical-align: top;
   font: normal 16px Roboto, 굴림, dotum, arial, sans-serif;
@@ -46,16 +44,42 @@ const InputFile = styled.input`
 `;
 
 class FileExplorer extends Component {
+  static propTypes = {
+    isFocus: PropTypes.bool
+  };
+
+  static defaultProps = {
+    isFocus: false
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.handleInputSearchFocus = this.handleInputSearchFocus.bind(this);
+  }
+
+  handleInputSearchFocus() {
+    this.props.setFocus( !!(this.inputSearch === document.activeElement) );
+  }
+
+  componentDidMount() {
+    this.inputSearch.focus();
+  }
+
   render() {
     return (
-      <div>
-        <AppHeader>
-          <HeaderInner>
-            <Logo />
-            <InputFile type="text" placeholder="파일 검색" />
-          </HeaderInner>
-        </AppHeader>
-      </div>
+      <AppHeader isFocus={this.props.isFocus}>
+        <HeaderInner>
+          <Logo />
+          <InputSearch 
+            innerRef={ (input) => { this.inputSearch = input; } }
+            type="text" 
+            placeholder="파일 검색"
+            onFocus={this.handleInputSearchFocus}
+            onBlur={this.handleInputSearchFocus}
+          />
+        </HeaderInner>
+      </AppHeader>
     );
   }
 }

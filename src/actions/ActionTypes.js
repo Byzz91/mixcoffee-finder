@@ -1,0 +1,4 @@
+/**
+ * FileExplorer
+ */
+export const STATUS_FILE_EXPLORER_FOCUS = "STATUS_FILE_EXPLORER_FOCUS";

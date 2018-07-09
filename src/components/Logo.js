@@ -7,7 +7,7 @@ const Title = styled.h1`
   font-family: Roboto;
   margin: 0;
   padding: 0;
-  font-size: 1.7em;
+  font-size: 1.6em;
   font-weight: bold;
   letter-spacing: -1px;
   margin: 15px 10px 10px 18px;
@@ -17,9 +17,7 @@ const Title = styled.h1`
 class Logo extends Component {
   render() {
     return (
-      <div>
-        <Title>Mixcoffee</Title>
-      </div>
+      <Title>Mixcoffee</Title>
     );
   }
 }
