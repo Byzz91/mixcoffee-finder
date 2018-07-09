@@ -12,6 +12,7 @@ const Title = styled.h1`
   letter-spacing: -1px;
   margin: 15px 10px 10px 18px;
   color: #5a5a5a;
+  user-select: none;
 `;
 
 class Logo extends Component {
