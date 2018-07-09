@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Logo from '../Logo';
+import LoadingBar from '../LoadingBar';
 
 const HeaderInner = styled.div`
   float: left;
@@ -70,6 +71,7 @@ class FileExplorer extends Component {
     return (
       <AppHeader isFocus={this.props.isFocus}>
         <HeaderInner>
+          <LoadingBar />
           <Logo />
           <InputSearch 
             innerRef={ (input) => { this.inputSearch = input; } }
