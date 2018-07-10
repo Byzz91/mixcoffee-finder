@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Logo from '../Logo';
 import LoadingBar from '../LoadingBar';
+
+/**
+ * @Ref https://material-ui.com/demos/selection-controls/
+ */
+import Checkbox from "@material-ui/core/Checkbox";
 
 const HeaderInner = styled.div`
   float: left;
@@ -44,23 +48,41 @@ const InputSearch = styled.input`
   }
 `;
 
-class FileExplorer extends Component {
-  static propTypes = {
-    isFocus: PropTypes.bool
-  };
+const OptionBox = styled.div`
+  display: ${ props => props.isFocus ? 'block' : 'none' };
+`;
 
-  static defaultProps = {
-    isFocus: false
+const Label = styled.label`
+  cursor: pointer;
+`;
+
+class FileExplorer extends Component {
+  state = {
+    searchPanelOpened: false,
+    excludeSystemFile: true,
+    excludeDevFile: true
   };
 
   constructor(props) {
     super(props);
 
-    this.handleInputSearchFocus = this.handleInputSearchFocus.bind(this);
+    this.handleOptionCheckbox = this.handleOptionCheckbox.bind(this);
+    this.handleSearchPanelOpen = this.handleSearchPanelOpen.bind(this);
+    this.handleSearchPanelClose = this.handleSearchPanelClose.bind(this);
   }
 
-  handleInputSearchFocus() {
-    this.props.setFocus( !!(this.inputSearch === document.activeElement) );
+  handleSearchPanelOpen() {
+    this.setState({ searchPanelOpened: true });
+  }
+
+  handleSearchPanelClose() {
+    this.setState({ searchPanelOpened: false });
+  }
+
+  handleOptionCheckbox(name) {
+    return (event) => {
+      this.setState({ [name]: event.target.checked });
+    };
   }
 
   componentDidMount() {
@@ -69,7 +91,11 @@ class FileExplorer extends Component {
 
   render() {
     return (
-      <AppHeader isFocus={this.props.isFocus}>
+      <AppHeader 
+        isFocus={this.state.searchPanelOpened}
+        onMouseOver={this.handleSearchPanelOpen}
+        onMouseOut={this.handleSearchPanelClose}
+      >
         <HeaderInner>
           <LoadingBar />
           <Logo />
@@ -77,9 +103,27 @@ class FileExplorer extends Component {
             innerRef={ (input) => { this.inputSearch = input; } }
             type="text" 
             placeholder="파일 검색"
-            onFocus={this.handleInputSearchFocus}
-            onBlur={this.handleInputSearchFocus}
           />
+
+          <OptionBox isFocus={this.state.searchPanelOpened}>
+            <Label>
+              <Checkbox
+                checked={this.state.excludeSystemFile}
+                onChange={this.handleOptionCheckbox('excludeSystemFile')}
+                value="excludeSystemFile"
+              />
+              <span>System Files</span>
+            </Label>
+
+            <Label>
+              <Checkbox
+                checked={this.state.excludeDevFile}
+                onChange={this.handleOptionCheckbox('excludeDevFile')}
+                value="excludeDevFile"
+              />
+              <span>Dev Files</span>
+            </Label>
+          </OptionBox>
         </HeaderInner>
       </AppHeader>
     );

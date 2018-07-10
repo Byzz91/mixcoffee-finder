@@ -9,11 +9,6 @@ import reducers from './reducers';
 
 const store = createStore(reducers);
 
-console.log(store.getState().fileExplorer.isFocus);
-// store.subscribe(() => {
-//   console.log(store.getState().fileExplorer.isFocus);
-// });
-
 ReactDOM.render(
   <Provider store={store}>
     <App />
