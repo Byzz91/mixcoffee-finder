@@ -7,6 +7,8 @@ import LoadingBar from '../LoadingBar';
  * @Ref https://material-ui.com/demos/selection-controls/
  */
 import Checkbox from "@material-ui/core/Checkbox";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 const HeaderInner = styled.div`
   float: left;
@@ -106,23 +108,28 @@ class FileExplorer extends Component {
           />
 
           <OptionBox isFocus={this.state.searchPanelOpened}>
-            <Label>
-              <Checkbox
-                checked={this.state.excludeSystemFile}
-                onChange={this.handleOptionCheckbox('excludeSystemFile')}
-                value="excludeSystemFile"
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.excludeSystemFile}
+                    onChange={this.handleOptionCheckbox('excludeSystemFile')}
+                    value="excludeSystemFile"
+                  />
+                }
+                label="System Files"
               />
-              <span>System Files</span>
-            </Label>
-
-            <Label>
-              <Checkbox
-                checked={this.state.excludeDevFile}
-                onChange={this.handleOptionCheckbox('excludeDevFile')}
-                value="excludeDevFile"
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.excludeDevFile}
+                    onChange={this.handleOptionCheckbox('excludeDevFile')}
+                    value="excludeDevFile"
+                  />
+                }
+                label="Dev Files"
               />
-              <span>Dev Files</span>
-            </Label>
+            </FormGroup>
           </OptionBox>
         </HeaderInner>
       </AppHeader>
