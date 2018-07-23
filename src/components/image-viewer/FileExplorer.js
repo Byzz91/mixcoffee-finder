@@ -22,7 +22,8 @@ const AppHeader = styled.div`
   position: fixed;
   background-color: #fafafa;
   border-bottom: 1px solid #ebebeb;
-  height: ${ props => props.isFocus ? '100px' : '60px' };
+  ${'' /* height: ${ props => props.isFocus ? '100px' : '60px' }; */}
+  height: 100px;
   width: 100%;
   transition: 0.1s;
 `;
@@ -30,7 +31,7 @@ const AppHeader = styled.div`
 const InputSearch = styled.input`
   height: 44px;
   vertical-align: top;
-  font: normal 16px Roboto, 굴림, dotum, arial, sans-serif;
+  font: normal 16px Roboto, gulim, dotum, arial, sans-serif;
   background-color: #fff;
   color: #222;
   box-sizing: border-box;
@@ -39,7 +40,7 @@ const InputSearch = styled.input`
   transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
   border: none;
-  margin: 8px 0 0 10px;
+  margin: 8px 0 0 0;
   padding: 0 10px;
   text-indent: 5px;
   width: calc(100% - 200px);
@@ -51,11 +52,8 @@ const InputSearch = styled.input`
 `;
 
 const OptionBox = styled.div`
-  display: ${ props => props.isFocus ? 'block' : 'none' };
-`;
-
-const Label = styled.label`
-  cursor: pointer;
+  ${'' /* display: ${ props => props.isFocus ? 'block' : 'none' }; */}
+  display: block;
 `;
 
 class FileExplorer extends Component {
@@ -136,5 +134,6 @@ class FileExplorer extends Component {
     );
   }
 }
+
 
 export default FileExplorer;
