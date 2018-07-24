@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Logo from '../Logo';
 import LoadingBar from '../LoadingBar';
+import PanelSettings from './PanelSettings';
 
 /**
  * @Ref https://material-ui.com/demos/selection-controls/
@@ -9,6 +10,11 @@ import LoadingBar from '../LoadingBar';
 import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+
+import IconSetting from 'react-icons/lib/md/settings';
+
+const RootBox = styled.div`
+`;
 
 const HeaderInner = styled.div`
   float: left;
@@ -60,15 +66,19 @@ class FileExplorer extends Component {
   state = {
     searchPanelOpened: false,
     excludeSystemFile: true,
-    excludeDevFile: true
+    excludeDevFile   : true,
+    /**
+     * Panel is opened?
+     */
+    panelSettings    : false
   };
 
   constructor(props) {
     super(props);
-
-    this.handleOptionCheckbox = this.handleOptionCheckbox.bind(this);
-    this.handleSearchPanelOpen = this.handleSearchPanelOpen.bind(this);
+    this.handleOptionCheckbox   = this.handleOptionCheckbox.bind(this);
+    this.handleSearchPanelOpen  = this.handleSearchPanelOpen.bind(this);
     this.handleSearchPanelClose = this.handleSearchPanelClose.bind(this);
+    this.togglePanelSettings    = this.togglePanelSettings.bind(this);
   }
 
   handleSearchPanelOpen() {
@@ -85,6 +95,10 @@ class FileExplorer extends Component {
     };
   }
 
+  togglePanelSettings() {
+    this.setState({ panelSettings: ! (!! this.state.panelSettings) });
+  }
+
   componentDidMount() {
     this.inputSearch.focus();
   }
@@ -98,12 +112,25 @@ class FileExplorer extends Component {
       >
         <HeaderInner>
           <LoadingBar />
-          <Logo />
-          <InputSearch 
-            innerRef={ (input) => { this.inputSearch = input; } }
-            type="text" 
-            placeholder="파일 검색"
-          />
+
+          <RootBox>
+            <Logo />
+            <InputSearch 
+              innerRef={ (input) => { this.inputSearch = input; } }
+              type="text" 
+              placeholder="파일 검색"
+            />
+            <IconSetting 
+              onClick={this.togglePanelSettings}
+              size="25"
+              style={{
+                color: '#b7b7b7',
+                cursor: 'pointer',
+                marginTop: '16px',
+                marginLeft: '10px'
+              }}
+            />
+          </RootBox>
 
           <OptionBox isFocus={this.state.searchPanelOpened}>
             <FormGroup row>
@@ -130,6 +157,8 @@ class FileExplorer extends Component {
             </FormGroup>
           </OptionBox>
         </HeaderInner>
+
+        <PanelSettings visible={this.state.panelSettings}></PanelSettings>
       </AppHeader>
     );
   }
