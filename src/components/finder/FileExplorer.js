@@ -3,17 +3,12 @@ import styled from 'styled-components';
 import Logo from '../Logo';
 import LoadingBar from '../LoadingBar';
 import PanelSettings from './PanelSettings';
-
-/**
- * @Ref https://material-ui.com/demos/selection-controls/
- */
-import Checkbox from "@material-ui/core/Checkbox";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import TitleBar from '../TitleBar';
 
 import IconSetting from 'react-icons/lib/md/settings';
 
 const RootBox = styled.div`
+  padding: 0 0 20px 0;
 `;
 
 const HeaderInner = styled.div`
@@ -29,7 +24,7 @@ const AppHeader = styled.div`
   background-color: #fafafa;
   border-bottom: 1px solid #ebebeb;
   ${'' /* height: ${ props => props.isFocus ? '100px' : '60px' }; */}
-  height: 100px;
+  height: auto;
   width: 100%;
   transition: 0.1s;
 `;
@@ -57,9 +52,12 @@ const InputSearch = styled.input`
   }
 `;
 
-const OptionBox = styled.div`
-  ${'' /* display: ${ props => props.isFocus ? 'block' : 'none' }; */}
-  display: block;
+const Setting = styled(IconSetting)`
+  color: #b7b7b7;
+  cursor: pointer;
+  margin-top: 19px;
+  margin-left: 10px;
+  font-size: 25px;
 `;
 
 class FileExplorer extends Component {
@@ -105,64 +103,33 @@ class FileExplorer extends Component {
 
   render() {
     return (
-      <AppHeader 
-        isFocus={this.state.searchPanelOpened}
-        onMouseOver={this.handleSearchPanelOpen}
-        onMouseOut={this.handleSearchPanelClose}
-      >
-        <HeaderInner>
-          <LoadingBar />
+      <div>
+        <TitleBar />
 
-          <RootBox>
-            <Logo />
-            <InputSearch 
-              innerRef={ (input) => { this.inputSearch = input; } }
-              type="text" 
-              placeholder="파일 검색"
-            />
-            <IconSetting 
-              onClick={this.togglePanelSettings}
-              size="25"
-              style={{
-                color: '#b7b7b7',
-                cursor: 'pointer',
-                marginTop: '16px',
-                marginLeft: '10px'
-              }}
-            />
-          </RootBox>
-
-          <OptionBox isFocus={this.state.searchPanelOpened}>
-            <FormGroup row>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.excludeSystemFile}
-                    onChange={this.handleOptionCheckbox('excludeSystemFile')}
-                    value="excludeSystemFile"
-                  />
-                }
-                label="System Files"
+        <AppHeader 
+          isFocus={this.state.searchPanelOpened}
+          onMouseOver={this.handleSearchPanelOpen}
+          onMouseOut={this.handleSearchPanelClose}
+        >
+          <HeaderInner>
+            <LoadingBar />
+            <RootBox>
+              <Logo />
+              <InputSearch 
+                innerRef={ (input) => { this.inputSearch = input; } }
+                type="text" 
+                placeholder="파일 검색"
               />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.excludeDevFile}
-                    onChange={this.handleOptionCheckbox('excludeDevFile')}
-                    value="excludeDevFile"
-                  />
-                }
-                label="Dev Files"
-              />
-            </FormGroup>
-          </OptionBox>
-        </HeaderInner>
+              <Setting onClick={this.togglePanelSettings} />
+            </RootBox>
+          </HeaderInner>
 
-        <PanelSettings 
-          visible={this.state.panelSettings}
-          togglePanel={this.togglePanelSettings}
-        ></PanelSettings>
-      </AppHeader>
+          <PanelSettings 
+            visible={this.state.panelSettings}
+            togglePanel={this.togglePanelSettings}
+          />
+        </AppHeader>
+      </div>
     );
   }
 }

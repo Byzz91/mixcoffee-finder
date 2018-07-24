@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-class ImageViewer extends Component {
+class Finder extends Component {
   render() {
     return (
       <FileExplorer
@@ -27,4 +27,4 @@ class ImageViewer extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ImageViewer);
+export default connect(mapStateToProps, mapDispatchToProps)(Finder);

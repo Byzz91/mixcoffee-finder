@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImageViewer from './finder/ImageViewer';
+import Finder from './finder/Finder';
 import { injectGlobal } from 'styled-components';
 
 injectGlobal`
@@ -17,7 +17,7 @@ injectGlobal`
 class App extends Component {
   render() {
     return (
-      <ImageViewer />
+      <Finder />
     );
   }
 }

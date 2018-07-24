@@ -18,11 +18,14 @@ function createWindow() {
 
   mainWindow = new BrowserWindow({
     width: 1000,
-    height: 800
+    height: 800,
+    frame: false,
+    titleBarStyle: 'hidden'
   });
 
   mainWindow.loadURL(startUrl);
   mainWindow.webContents.openDevTools();
+  mainWindow.setHasShadow(true);
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
