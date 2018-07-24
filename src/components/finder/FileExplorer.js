@@ -158,7 +158,10 @@ class FileExplorer extends Component {
           </OptionBox>
         </HeaderInner>
 
-        <PanelSettings visible={this.state.panelSettings}></PanelSettings>
+        <PanelSettings 
+          visible={this.state.panelSettings}
+          togglePanel={this.togglePanelSettings}
+        ></PanelSettings>
       </AppHeader>
     );
   }
