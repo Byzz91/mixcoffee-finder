@@ -12,12 +12,13 @@ const TitleBarBox = styled.ul`
   background-color: #FFF;
   margin: 0;
   padding: 0;
-  cursor: move;
+  -webkit-app-region: drag;
 
   & > li {
     display: inline-block;
     float: right;
     cursor: pointer;
+    -webkit-app-region: no-drag;
   }
 `;
 
@@ -31,7 +32,7 @@ class TitleBar extends Component {
       <TitleBarBox>
         <li>
           <IconWrapper>
-            <IconClose />
+            {/* <IconClose /> */}
           </IconWrapper>
         </li>
       </TitleBarBox>

@@ -26,6 +26,7 @@ function createWindow() {
   mainWindow.loadURL(startUrl);
   mainWindow.webContents.openDevTools();
   mainWindow.setHasShadow(true);
+  mainWindow.setIgnoreMouseEvents(true);
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
