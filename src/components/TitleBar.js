@@ -6,6 +6,13 @@ import { ic_close } from 'react-icons-kit/md/ic_close';
 import { ic_fullscreen } from 'react-icons-kit/md/ic_fullscreen';
 import { ic_fullscreen_exit } from 'react-icons-kit/md/ic_fullscreen_exit';
 
+/**
+ * @awesome Thank for github.com
+ * 
+ * https://github.com/electron/electron/issues/7300
+ */
+const ipcRenderer = window.require('electron').ipcRenderer;
+
 const TitleBarBox = styled.ul`
   display: block;
   height: 24px;
@@ -34,6 +41,23 @@ const IconWrapper = styled.span`
 `;
 
 class TitleBar extends Component {
+
+  constructor(props) {
+    super(props);
+
+    ipcRenderer.on('invoke-action-response', () => {
+      console.log('invoke-action-response');
+    });
+    this.handleWindowMaximize = this.handleWindowMaximize.bind(this);
+  }
+
+  handleWindowMaximize() {
+    ipcRenderer.send('invoke-action', {
+      type  : 'windowController',
+      params: ['maximize']
+    });
+  }
+
   render() {
     return (
       <TitleBarBox>
@@ -43,8 +67,8 @@ class TitleBar extends Component {
           </IconWrapper>
         </li>
         <li>
-          <IconWrapper>
-            <Icon icon={ic_fullscreen} size="24" />
+          <IconWrapper id="-window-action-maximize">
+            <Icon icon={ic_fullscreen} onClick={this.handleWindowMaximize} size="24" />
           </IconWrapper>
         </li>
         <li>

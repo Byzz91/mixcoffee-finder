@@ -10,7 +10,7 @@ injectGlobal`
   }
   body, input {
     font-weight: normal;
-    font-family: Roboto, sans-serif;
+    font-family: "Roboto", sans-serif;
   }
 `;
 

@@ -1,6 +1,6 @@
 const url = require('url');
 const path = require('path');
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, remote, ipcMain } = require('electron');
 
 let mainWindow;
 
@@ -30,6 +30,13 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  // mainWindow.on('show', () => {
+  //   remote.getCurrentWebContents().getElementById('-window-action-maximize').addEventListener('click', (e) => {
+  //     console.log('maximize');
+  //     remote.getCurrentWindow().maximize();
+  //   });
+  // });
 }
 
 app.on('ready', createWindow);
@@ -43,5 +50,33 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
+  }
+});
+
+console.log('invoke-action-embeded');
+ipcMain.on('invoke-action', (event, senderType) => {
+  console.log('invoke-action-inner');
+  console.log('senderType', senderType);
+
+  if (typeof senderType === 'object' && 'type' in senderType) {
+    switch (senderType.type) {
+      case 'windowController':
+        if (! senderType.params instanceof Array) {
+          senderType.params = [senderType.params];
+        }
+
+        senderType.params = senderType.params.join('');
+
+        if (senderType.params === 'maximize') {
+          remote.getCurrentWindow().maximize();
+        } else if (senderType.params === 'minimize') {
+          remote.getCurrentWindow().minimize();
+        } else if (senderType.params === 'close') {
+          remote.getCurrentWindow().close();
+        } else {
+        }
+        break;
+      default:
+    }
   }
 });
