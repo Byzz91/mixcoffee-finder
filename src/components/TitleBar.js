@@ -44,17 +44,19 @@ class TitleBar extends Component {
 
   constructor(props) {
     super(props);
-
-    ipcRenderer.on('invoke-action-response', () => {
-      console.log('invoke-action-response');
-    });
-    this.handleWindowMaximize = this.handleWindowMaximize.bind(this);
+    this.handleWindow = this.handleWindow.bind(this);
   }
 
-  handleWindowMaximize() {
+  componentDidMount() {
+    ipcRenderer.on('invoke-action', (event, args) => {
+      console.log(args);
+    });
+  }
+
+  handleWindow(eventType) {
     ipcRenderer.send('invoke-action', {
       type  : 'windowController',
-      params: ['maximize']
+      params: [eventType]
     });
   }
 
@@ -63,17 +65,29 @@ class TitleBar extends Component {
       <TitleBarBox>
         <li>
           <IconWrapper>
-            <Icon icon={ic_close} size="24" />
-          </IconWrapper>
-        </li>
-        <li>
-          <IconWrapper id="-window-action-maximize">
-            <Icon icon={ic_fullscreen} onClick={this.handleWindowMaximize} size="24" />
+            <Icon icon={ic_close} 
+                  data-window-action="close"
+                  onClick={this.handleWindow.bind(this, 'close')}
+                  size="24"
+            />
           </IconWrapper>
         </li>
         <li>
           <IconWrapper>
-            <Icon icon={ic_fullscreen_exit} size="24" />
+            <Icon icon={ic_fullscreen} 
+                  data-window-action="maximize" 
+                  onClick={this.handleWindow.bind(this, 'maximize')} 
+                  size="24"
+            />
+          </IconWrapper>
+        </li>
+        <li>
+          <IconWrapper>
+            <Icon icon={ic_fullscreen_exit} 
+                  data-window-action="minimize"
+                  onClick={this.handleWindow.bind(this, 'minimize')}
+                  size="24"
+            />
           </IconWrapper>
         </li>
       </TitleBarBox>

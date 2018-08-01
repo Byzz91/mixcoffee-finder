@@ -30,7 +30,10 @@ const AppHeader = styled.div`
   transition: 0.1s;
 `;
 
-const InputSearch = styled.input`
+const InputSearch = styled.input.attrs({
+  type: "text",
+  placeholder: "search files..."
+})`
   height: 44px;
   vertical-align: top;
   font: normal 16px Roboto, gulim, dotum, arial, sans-serif;
@@ -122,8 +125,6 @@ class FileExplorer extends Component {
               <Logo />
               <InputSearch 
                 innerRef={ (input) => { this.inputSearch = input; } }
-                type="text" 
-                placeholder="파일 검색"
               />
               <Setting onClick={this.togglePanelSettings}>
                 <Icon icon={ic_settings} size="28" />

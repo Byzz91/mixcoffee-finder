@@ -1,6 +1,6 @@
 const url = require('url');
 const path = require('path');
-const { app, BrowserWindow, remote, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcRenderer, ipcMain } = require('electron');
 
 let mainWindow;
 
@@ -26,17 +26,9 @@ function createWindow() {
   mainWindow.loadURL(startUrl);
   mainWindow.webContents.openDevTools();
   mainWindow.setHasShadow(true);
-  // mainWindow.setIgnoreMouseEvents(true);
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-
-  // mainWindow.on('show', () => {
-  //   remote.getCurrentWebContents().getElementById('-window-action-maximize').addEventListener('click', (e) => {
-  //     console.log('maximize');
-  //     remote.getCurrentWindow().maximize();
-  //   });
-  // });
 }
 
 app.on('ready', createWindow);
@@ -53,10 +45,9 @@ app.on('activate', () => {
   }
 });
 
-console.log('invoke-action-embeded');
+
 ipcMain.on('invoke-action', (event, senderType) => {
-  console.log('invoke-action-inner');
-  console.log('senderType', senderType);
+  // event.sender.send('invoke-action', senderType);  
 
   if (typeof senderType === 'object' && 'type' in senderType) {
     switch (senderType.type) {
@@ -67,16 +58,18 @@ ipcMain.on('invoke-action', (event, senderType) => {
 
         senderType.params = senderType.params.join('');
 
-        if (senderType.params === 'maximize') {
-          remote.getCurrentWindow().maximize();
-        } else if (senderType.params === 'minimize') {
-          remote.getCurrentWindow().minimize();
-        } else if (senderType.params === 'close') {
-          remote.getCurrentWindow().close();
-        } else {
+        switch (senderType.params) {
+          case 'minimize':
+            mainWindow.minimize();
+            break;
+          case 'close':
+            mainWindow.close();
+            break;
+          case 'maximize':
+          default:
+            mainWindow.maximize();
         }
-        break;
-      default:
+      break;
     }
   }
 });
