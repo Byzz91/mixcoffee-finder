@@ -11,7 +11,7 @@ const TitleBarBox = styled.ul`
   height: 24px;
   line-height: 24px;
   background-color: #fafafa;
-  margin: 0 5px;
+  margin: 0;
   padding: 0 5px;
   -webkit-app-region: drag;
 

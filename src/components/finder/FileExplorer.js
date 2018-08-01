@@ -45,7 +45,7 @@ const InputSearch = styled.input`
   margin: 8px 0 0 0;
   padding: 0 10px;
   text-indent: 5px;
-  width: calc(100% - 175px);
+  width: calc(100% - 155px);
 
   &:hover,
   &:focus {
