@@ -5,10 +5,11 @@ import LoadingBar from '../LoadingBar';
 import PanelSettings from './PanelSettings';
 import TitleBar from '../TitleBar';
 
-import IconSetting from 'react-icons/lib/md/settings';
+import { Icon } from 'react-icons-kit';
+import { ic_settings } from 'react-icons-kit/md/ic_settings'
 
 const RootBox = styled.div`
-  padding: 0 0 20px 0;
+  padding: 0 0 15px 0;
 `;
 
 const HeaderInner = styled.div`
@@ -44,7 +45,7 @@ const InputSearch = styled.input`
   margin: 8px 0 0 0;
   padding: 0 10px;
   text-indent: 5px;
-  width: calc(100% - 200px);
+  width: calc(100% - 175px);
 
   &:hover,
   &:focus {
@@ -52,12 +53,16 @@ const InputSearch = styled.input`
   }
 `;
 
-const Setting = styled(IconSetting)`
-  color: #b7b7b7;
+const Setting = styled.span`
+  display: block;
+  float: right;
+  color: #c1c1c1;
   cursor: pointer;
-  margin-top: 19px;
-  margin-left: 10px;
-  font-size: 25px;
+  margin-top: 17px;
+
+  &:hover {
+    color: #696969;
+  }
 `;
 
 class FileExplorer extends Component {
@@ -120,7 +125,9 @@ class FileExplorer extends Component {
                 type="text" 
                 placeholder="파일 검색"
               />
-              <Setting onClick={this.togglePanelSettings} />
+              <Setting onClick={this.togglePanelSettings}>
+                <Icon icon={ic_settings} size="28" />
+              </Setting>
             </RootBox>
           </HeaderInner>
 

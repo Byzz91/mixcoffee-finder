@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import IconClose from 'react-icons/lib/md/close';
+import { Icon } from 'react-icons-kit';
+import { ic_close } from 'react-icons-kit/md/ic_close';
 
 /**
  * PanelSettings Scale
@@ -44,13 +45,11 @@ const Title = styled.h3`
   display: none;
 `;
 
-const Close = styled(IconClose)`
+const Close = styled.span`
   display: inline-block;
   float: right;
   color: #c1c1c1;
-  font-size: 20px;
   cursor: pointer;
-  font-weight: 100;
 
   &:hover {
     color: #696969;
@@ -94,7 +93,9 @@ class PanelSettings extends Component {
       >
         <Header>
           <Title>Settings</Title>
-          <Close onClick={this.props.togglePanel} />
+          <Close onClick={this.props.togglePanel}>
+            <Icon icon={ic_close} size="32" />
+          </Close>
         </Header>
       </PanelSettingsBox>
     );
