@@ -10,6 +10,7 @@ let mainWindow;
  * @returns void
  */
 function createWindow() {
+  console.log('process.env.ELECTRON_START_URL', process.env.ELECTRON_START_URL);
   const startUrl = process.env.ELECTRON_START_URL || url.format({
     pathname: path.join(__dirname, '/../build/index.html'),
     protocol: 'file:',

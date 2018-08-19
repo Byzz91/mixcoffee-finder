@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { Wrapper, FileItem } from './FileList.sc';
 
 class FileList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Wrapper>
