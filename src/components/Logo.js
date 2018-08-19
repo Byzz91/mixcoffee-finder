@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Icon } from 'react-icons-kit';
+import { ic_image } from 'react-icons-kit/md/ic_image'
 
 const Title = styled.h1`
   display: block;
@@ -13,12 +15,19 @@ const Title = styled.h1`
   margin: 15px 20px 10px 25px;
   color: #5a5a5a;
   user-select: none;
+
+  /* Logo Icon */
+  & > div {
+    vertical-align: -3px;
+  }
 `;
 
 class Logo extends Component {
   render() {
     return (
-      <Title>Finder</Title>
+      <Title>
+        <Icon icon={ic_image} size="24" />Finder
+      </Title>
     );
   }
 }

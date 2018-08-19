@@ -9,7 +9,7 @@ export const HeaderInner = styled.div`
   position: relative;
   height: 100%;
   box-sizing: border-box;
-  width: 700px;
+  width: 800px;
 `;
 
 export const AppHeader = styled.div`
@@ -40,7 +40,7 @@ export const InputSearch = styled.input.attrs({
   margin: 8px 0 0 0;
   padding: 0 10px;
   text-indent: 5px;
-  width: calc(100% - 155px);
+  width: calc(100% - 170px);
 
   &:hover,
   &:focus {
