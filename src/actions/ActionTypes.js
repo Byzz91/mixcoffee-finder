@@ -1,4 +1,4 @@
 /**
  * FileExplorer
  */
-export const STATUS_FILE_EXPLORER_FOCUS = "STATUS_FILE_EXPLORER_FOCUS";
+export const ADD_DIRS_PATH = "ADD_DIRS_PATH";

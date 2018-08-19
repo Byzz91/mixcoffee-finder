@@ -6,41 +6,49 @@ import * as actions from '../../actions';
 
 const SeekerCore = window.require('dirs-stream');
 
+/**
+ * mapStateToProps
+ */
 const mapStateToProps = (state) => {
   return {
-    isFileExplorerFocus: state.fileExplorer.isFocus
+    dirsPath: state.fileExplorer.dirsPath
   }
 };
 
+/**
+ * mapDispatchToProps
+ */
 const mapDispatchToProps = (dispatch) => {
   return {
-    setFileExplorerFocus: (isFocus) => { dispatch( actions.setFileExplorerFocus(isFocus) ); }
+    addDirsPath: (path) => {
+      dispatch( actions.addDirsPath(path) );
+    }
   };
 };
 
 class Finder extends Component {
   seeker;
-  dirsIndexed;
 
   constructor(props) {
     super(props);
 
-    this.seeker = void 0;
-    this.dirsIndexed = [];
+    this.seeker = null;
   }
 
   componentDidMount() {
-    this.seeker = new SeekerCore("D:\\").Stream;
+    this.seeker = new SeekerCore("E:\\").Stream;
     this.seeker.on('data', (pathString) => {
-      this.dirsIndexed.push(pathString);
+      /**
+       * add DirsPath
+       */
+      this.props.addDirsPath(pathString);
     });
   }
 
   render() {
     return (
       <FileExplorer
-        isFocus={this.props.isFileExplorerFocus}
-        setFocus={this.props.setFileExplorerFocus}
+        dirsPath={this.props.dirsPath}
       />
     );
   }

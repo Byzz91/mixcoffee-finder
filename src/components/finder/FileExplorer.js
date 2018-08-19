@@ -85,7 +85,9 @@ class FileExplorer extends Component {
           />
         </AppHeader>
 
-        <FileList />
+        <FileList
+          dirsPath={this.props.dirsPath}
+        />
       </div>
     );
   }

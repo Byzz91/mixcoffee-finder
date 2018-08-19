@@ -1,9 +1,9 @@
 import { 
-  STATUS_FILE_EXPLORER_FOCUS 
+  ADD_DIRS_PATH
 } from '../actions/ActionTypes';
 
 const initialState = {
-  isFocus: false
+  dirsPath: []
 };
 
 /**
@@ -13,11 +13,12 @@ const initialState = {
  */
 export default function fileExplorer(state = initialState, action) {
   switch (action.type) {
-    case STATUS_FILE_EXPLORER_FOCUS: {
+    case ADD_DIRS_PATH:
       return {
-        isFocus: action.isFocus
-      };
-    }
+        ...state,
+        dirsPath: [...state.dirsPath, action.path]
+        // dirsPath: state.dirsPath.concat(action.path)
+      }
     default:
       return state;
   }
