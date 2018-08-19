@@ -74,7 +74,7 @@ class FileExplorer extends Component {
                 innerRef={ (input) => { this.inputSearch = input; } }
               />
               <Setting onClick={this.togglePanelSettings}>
-                <Icon icon={ic_settings} size="28" />
+                <Icon icon={ic_settings} size="22" />
               </Setting>
             </RootBox>
           </HeaderInner>

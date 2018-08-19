@@ -53,7 +53,7 @@ export const Setting = styled.span`
   float: right;
   color: #c1c1c1;
   cursor: pointer;
-  margin-top: 17px;
+  margin-top: 20px;
 
   &:hover {
     color: #696969;
