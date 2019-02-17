@@ -39,23 +39,23 @@ class Finder extends Component {
   }
 
   componentDidMount() {
-    this.seeker = new SeekerCore("D:\\devs\\").Stream;
+    // this.seeker = new SeekerCore("C:\\").Stream;
 
-    this.seeker.on('data', (pathString) => {
-      /**
-       * add DirsPath
-       */
-      pathString = pathString.toString();
-      console.log('pathString', pathString);
-      this.dirsDictionary.push( pathString );
-      // console.log(pathString.toString());
-      // this.props.addDirsPath(pathString);
-    });
+    // this.seeker.on('data', (pathString) => {
+    //   /**
+    //    * add DirsPath
+    //    */
+    //   pathString = pathString.toString();
+    //   // console.log('pathString', pathString);
+    //   this.dirsDictionary.push( pathString );
+    //   // console.log(pathString.toString());
+    //   // this.props.addDirsPath(pathString);
+    // });
 
-    this.seeker.on('end', () => {
-      console.log(`No More Datas...`);
-      console.log(this.dirsDictionary);
-    });
+    // this.seeker.on('end', () => {
+    //   console.log(`No More Datas...`);
+    //   console.log(this.dirsDictionary);
+    // });
   }
 
   render() {
