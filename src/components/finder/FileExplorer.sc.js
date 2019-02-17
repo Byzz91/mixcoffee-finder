@@ -22,6 +22,12 @@ export const AppHeader = styled.div`
   transition: 0.1s;
 `;
 
+export const FileListWrapper = styled.div`
+  position: relative;
+  height: 100%;
+  width: 100%;
+`;
+
 export const InputSearch = styled.input.attrs({
   type: "text",
   placeholder: "search files..."

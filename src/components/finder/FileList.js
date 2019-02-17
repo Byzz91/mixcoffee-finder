@@ -7,6 +7,7 @@ class FileList extends Component {
       if (! this.props.dirsPath instanceof Array) { return; }
 
       return this.props.dirsPath.map((pathName, index) => {
+
         return (
           <FileItem key={ (index + 1) }>{ pathName.toString() }</FileItem>
         );

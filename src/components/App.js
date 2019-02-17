@@ -22,6 +22,7 @@ injectGlobal`
     font-weight: normal;
     font-family: "Roboto", sans-serif;
   }
+  #root { width: 100%; height: 100%; }
 `;
 
 class App extends Component {

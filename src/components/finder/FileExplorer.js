@@ -9,7 +9,8 @@ import {
   HeaderInner,
   AppHeader,
   InputSearch,
-  Setting
+  Setting,
+  FileListWrapper
 } from './FileExplorer.sc';
 
 import { Icon } from 'react-icons-kit';
@@ -28,6 +29,7 @@ class FileExplorer extends Component {
 
   constructor(props) {
     super(props);
+
     this.handleOptionCheckbox   = this.handleOptionCheckbox.bind(this);
     this.handleSearchPanelOpen  = this.handleSearchPanelOpen.bind(this);
     this.handleSearchPanelClose = this.handleSearchPanelClose.bind(this);
@@ -85,9 +87,9 @@ class FileExplorer extends Component {
           />
         </AppHeader>
 
-        <FileList
-          dirsPath={this.props.dirsPath}
-        />
+        <FileListWrapper>
+          <FileList dirsPath={this.props.dirsPath} />
+        </FileListWrapper>
       </div>
     );
   }
